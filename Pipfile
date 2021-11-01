@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django-bootstrap5 = "*"
 cloudinary = "*"
+djangorestframework = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
