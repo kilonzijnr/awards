@@ -80,7 +80,7 @@ def new_post(request):
         form = NewPostForm()
     return render(request,)
 
-def new_project(request, c_id):
+def specific_project(request, c_id):
     current_user = request.user
     current_project = Project.objects.get(id= c_id)
     ratings = Rating.objects.filter(post_id= c_id)
