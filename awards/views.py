@@ -43,7 +43,7 @@ def home(request):
     users = User.objects.exclude(id=request.user.id)
     current_user = request.user
 
-    return render(request,"")
+    return render(request,"home.html", {'post':post, 'user':current_user, 'users':users})
 
 
 @login_required(login_url='/accounts/login')
@@ -51,7 +51,7 @@ def profile(request):
     """Method for displaying user profile"""
     posts = Project.objects.all().order_by('-date_posted')
 
-    return render(request, '')
+    return render(request, 'profile.html',{'posts':posts})
 
 @login_required(login_url='/accounts/login')
 def edit(request):
@@ -73,15 +73,23 @@ def edit(request):
         'user_form': user_form,
         'prof_form': prof_form,
     }
-    return render(request, '')
+    return render(request, 'new_profile.html', parameters)
 
 @login_required(login_url='/accounts/login')
 def new_post(request):
     """View point for defining a new post"""
     current_user = request.user
     if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.user = current_user
+            post.save()
+        return redirect('home')
+    else:
         form = NewPostForm()
-    return render(request,)
+    return render (request, 'new_post.html', {"form": form})
+
 
 def specific_project(request, c_id):
     """Viewpoint for displaying a specific project"""
@@ -92,7 +100,7 @@ def specific_project(request, c_id):
     content = Rating.objects.filter(post_id= c_id).aggregate(Avg('content_rating'))
     design = Rating.objects.filter(post_id= c_id).aggregate(Avg('design_rating'))
 
-    return render(request,'')
+    return render(request,'project.html',{"project":current_project, 'ratings':ratings,"design":design, "content":content, "usability":usability, "user":current_user})
 
 def rate_review(request, id):
     """Viewpoint for ratings"""
@@ -110,7 +118,7 @@ def rate_review(request, id):
     else:
         form = ProjectRatingForm()
 
-    return render(request,'')
+    return render(request,'rating.html', {'form':form, "project":current_project, "user":current_user})
 
 def search_results(request):
     """View Point for searching project name"""
@@ -120,11 +128,11 @@ def search_results(request):
 
         message = f'{search_term}'
 
-        return render(request,'')
+        return render(request,'search.html', {"message":message,"posts":searched_projects})
 
     else:
         message = "Kindly enter an input"
-        return render(request,'')
+        return render(request,'search.html', {"message":message,})
 
 
 
