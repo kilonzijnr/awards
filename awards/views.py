@@ -107,5 +107,19 @@ def rate_review(request, id):
 
     return render(request,'')
 
-    
+def search_results(request):
+    """View Point for searching project name"""
+    if 'projects' in request.GET and request.GET['projects']:
+        search_term = request.GET.get("projects")
+        searched_projects = Project.search_by_name(search_term)
+
+        message = f'{search_term}'
+
+        return render(request,'')
+
+    else:
+        message = "Kindly enter an input"
+        return render(request,'')
+
+
 
