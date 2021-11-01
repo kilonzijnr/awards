@@ -72,4 +72,21 @@ def edit(request):
     }
     return render(request, '')
 
-    
+@login_required(login_url='/accounts/login')
+def new_post(request):
+    """View point for defining a new post"""
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewPostForm()
+    return render(request,)
+
+def new_project(request, c_id):
+    current_user = request.user
+    current_project = Project.objects.get(id= c_id)
+    ratings = Rating.objects.filter(post_id= c_id)
+    usability = Rating.objects.filter(post_id= c_id).aggregate(Avg('usability_rating'))
+    content = Rating.objects.filter(post_id= c_id).aggregate(Avg('content_rating'))
+    design = Rating.objects.filter(post_id= c_id).aggregate(Avg('design_rating'))
+
+    return render(request,'')
+
