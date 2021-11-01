@@ -26,8 +26,9 @@ class Project(models.Model):
     """A model class for Projects"""
     image = CloudinaryField('image')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=50)
+    sitename = models.CharField(max_length=50)
     link= models.CharField(max_length=250)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
     def save_project(self):
         self.save()
