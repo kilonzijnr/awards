@@ -1,14 +1,9 @@
 from django.core import exceptions
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxLengthValidator, MinLengthValidator
-from django.dispatch import receiver
 
 from cloudinary.models import CloudinaryField
-from django.db.models.signals import post_save
-from django.core.exceptions import ObjectDoesNotExist
 
-import cloudinary
 # Create your models here.
 
 class Profile(models.Model):
@@ -19,38 +14,16 @@ class Profile(models.Model):
     bio = models.CharField(blank=True, default='No Bio!', max_length=150)
     name = models.CharField(blank=True, max_length= 30)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f'{self.user.username}profile'
-
-    @receiver(post_save,sender= User)
-    def create_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_profile(sender,instance,**kwargs):
-        try:
-            instance.profile.save()
-        except ObjectDoesNotExist:
-            Profile.objects.create(user=instance)
-
-    @classmethod
-    def search_profile(cls,name):
-        return cls.objects.filter(user__username__icontains=name).all()
+    email = models.EmailField()
 
     def save_profile(self):
         self.save()
 
-    def delete_profile(self):
-        self.delete()
-
-    def update_image(self,user_id, new_image):
-        user = User.objects.get(id = user_id)
-        self.profile_photo = new_image
-        self.save()
+    def __str__(self):
+        return self.name
 
 class Project(models.Model):
+    """A model class for Projects"""
     image = CloudinaryField('image')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50)
@@ -73,6 +46,7 @@ class Project(models.Model):
         return self.name
 
 class Rating(models.Model):
+    """A model class for ratings"""
     rating=(
         (1, '1'),
         (2, '2'),
@@ -85,7 +59,27 @@ class Rating(models.Model):
         (9, '9'),
         (10, '10')
     )
-    
+
+    design = models.IntegerField(choices=rating,default=0, blank=True)
+    content = models.IntegerField(choices=rating, blank=True)
+    usability = models.IntegerField(choices=rating, blank=True)
+    score = models.FloatField(default=0, blank=True)
+    design_rating = models.FloatField(default=0, blank=True)
+    usability_rating = models.FloatField(default=0, blank=True)
+    content_rating = models.FloatField(default=0, blank=True)
+    post = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratee', null=True)
+
+    def save_rating(self):
+        self.save()
+
+    @classmethod
+    def get_ratings(cls,id):
+        ratings = Rating.objects.filter(project_id=id).all()
+        return ratings
+
+    def __str__(self):
+        return f'{self.project}Rating'
 
 
 
