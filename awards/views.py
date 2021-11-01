@@ -37,6 +37,7 @@ class ProjectSerializer(APIView):
 
 @login_required(login_url='/accounts/login')
 def home(request):
+    """Method for displaying landing page"""
 
     post = Project.objects.all().order_by('-date_posted')
     users = User.objects.exclude(id=request.user.id)
@@ -47,12 +48,14 @@ def home(request):
 
 @login_required(login_url='/accounts/login')
 def profile(request):
+    """Method for displaying user profile"""
     posts = Project.objects.all().order_by('-date_posted')
 
     return render(request, '')
 
 @login_required(login_url='/accounts/login')
 def edit(request):
+    """Method for editintg post"""
 
     if request.method == "POST":
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -81,6 +84,7 @@ def new_post(request):
     return render(request,)
 
 def specific_project(request, c_id):
+    """Viewpoint for displaying a specific project"""
     current_user = request.user
     current_project = Project.objects.get(id= c_id)
     ratings = Rating.objects.filter(post_id= c_id)
@@ -91,6 +95,7 @@ def specific_project(request, c_id):
     return render(request,'')
 
 def rate_review(request, id):
+    """Viewpoint for ratings"""
     current_user = request.user
     current_project = Project.objects.get(id=id)
 
