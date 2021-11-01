@@ -1,0 +1,37 @@
+{%extends 'awards/base.html'%}
+{% load django-bootstrap5 %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 panel-form">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="text-center ">Rate this site</h4>
+                </div>
+                <div class="panel-body">
+                    <form action="{% url 'review' project.id %}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+
+                        {% bootstrap_form form%}
+                        <div class="form-group" style=" width: 100%; margin-top: 5%;">
+                            <input type="submit" class="btn " value="Update">
+
+                        </div>
+
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- empty div -->
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{%extends "registration/base.html"%}
+
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6 panel-form" >
+      {% if form.errors %}
+        <p> Password or Username is incorrect </p>
+      {% endif %}
+      <div class="panel panel-default"style="background-color: white !important;" >
+
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+          <form  action="/accounts/login/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+
+            <div class="form-group" style=" width: 100%; padding-top: 3%;">
+                <input type="submit" class="btn" value="Login"  style="align-items: center; width: 100%; background-color:rgb(201, 157, 12);; color: white;" >
+            </div>
+              
+            
+
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+          <div class="sign-up" style="padding-left: 28%; padding-top: 3%;">
+             <span class="p">Don't have an account?</span>
+               
+             <a href="/accounts/register/" class="ml-2" style="color:rgb(201, 157, 12);">Sign Up</a>
+        </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
