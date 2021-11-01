@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django-bootstrap5'
+    'cloudinary'
+    'awards'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
