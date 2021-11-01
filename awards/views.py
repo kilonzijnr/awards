@@ -90,3 +90,22 @@ def specific_project(request, c_id):
 
     return render(request,'')
 
+def rate_review(request, id):
+    current_user = request.user
+    current_project = Project.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ProjectRatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.project = current_project
+            rating.user = current_user
+            rating.save()
+            return redirect('project',id)
+    else:
+        form = ProjectRatingForm()
+
+    return render(request,'')
+
+    
+
