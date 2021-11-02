@@ -1,0 +1,56 @@
+{%extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container">
+    
+
+    <div class="row">
+        <!-- Empty div -->
+        <div class="col-md-3 phones" >
+           
+        </div>
+        <div class="col-md-6 panel-form" >
+          
+          <div class="panel panel-default">
+    
+            <div class="panel-heading" style="background-color: rgb(12, 12, 12);">
+              <h4 class="text-center " style=" color:white ; font-weight: bolder;">
+                  Update Your Profile
+              </h4>
+            </div>
+            <div class="panel-body" style="background-color: #f7fbfc; color: black;">
+                  
+                <form  action="{%url 'new_profile'%}" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                  
+                    {{ user_form|crispy}}
+                    {{prof_form|crispy}}
+    
+                    <div class="form-group" style=" width: 100%; margin-top: 5%;">
+                        <input type="submit" class="btn " value="Update"  style="align-items: center; width: 100%; background-color: rgb(22, 22, 20); color: white;" >
+    
+                    </div>
+    
+                <input type="hidden" name="next" value="{{next}}">
+                  </form>
+    
+    
+              
+    
+            </div>
+    
+          </div>
+    
+        </div>
+        <!-- empty div -->
+        <div class="col-md-2"></div>
+      </div>
+    </div>  
+    
+      {% block scripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      {% bootstrap_javascript %}
+    {% endblock %}
+    {% endblock %}    

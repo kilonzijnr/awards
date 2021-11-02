@@ -8,6 +8,8 @@ django-bootstrap5 = "*"
 cloudinary = "*"
 djangorestframework = "*"
 psycopg2 = "*"
+django-heroku = "*"
+django-registration = "*"
 
 [dev-packages]
 
