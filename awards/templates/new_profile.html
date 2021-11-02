@@ -1,8 +1,8 @@
 {%extends "base.html" %}
 {% load django_bootstrap5 %}
-{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
+
 <div class="container">
     
 
@@ -24,9 +24,8 @@
                   
                 <form  action="{%url 'new_profile'%}" method="post" enctype="multipart/form-data">
                     {%csrf_token%}
-                  
-                    {{ user_form|crispy}}
-                    {{prof_form|crispy}}
+                    {{user_form}}
+                    {{prof_form}}
     
                     <div class="form-group" style=" width: 100%; margin-top: 5%;">
                         <input type="submit" class="btn " value="Update"  style="align-items: center; width: 100%; background-color: rgb(22, 22, 20); color: white;" >
