@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container" style="color: black;">
+    <div class="row">
+        {% if posts %}
+        <h3>Found {{ posts|length }}</h3>
+        {% else %}
+        <h3>No Posts Found!{{message}}</h3>
+        {% endif %}
+        <br/>
+        <br/>
+
+        <div class="row">
+        {% for post in posts %}
+        <a href="{% url 'project' post.id %}">
+
+            <li class="row mt-5 hvr-grow border-bottom">
+              <div class="col-md-3">
+                <a href="{% url 'project' post.id %}"><span style="display: none;">{{ post.sitename }}</span><img
+                        src="{{ post.image.url }}" class="img-thumbnail" width="500"></a>
+              </div>
+              <div class="col-md-9 project-font">
+                <a class="user-head" href="">
+                  <button class="btn bg-transparent btn-lg" data-toggle="tooltip" data-placement="bottom"
+                          title="User">
+                    <img src="{{ user.profile.profile_photo.url }}" class="rounded-circle" width="40" height="40">
+                  <span class="username mx-2" style="font-size: 25px;">{{post.user}}</span></button></a>
+                <div class="ml-4">
+                  <p>Project Name: {{ post.sitename }}</p>
+                  <p class=""><a href="{{ post.link }}">
+                    <button class="btn btn-lg">LINK</button>
+                  </a></p>
+                  <p class="text-muted float-right">{{ post.post_date }}</p>
+                </div>
+              </div>
+            </li>
+            
+          </a>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

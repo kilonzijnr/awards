@@ -3,23 +3,17 @@
 
 {% block content %}
 <div class="container">
-    
-
-    <div class="row">
-        <!-- Empty div -->
         <div class="col-md-3 phones" >
-           
         </div>
         <div class="col-md-6 panel-form" >
           
           <div class="panel panel-default">
     
-            <div class="panel-heading" style="background-color: rgb(24, 23, 22);">
-              <h4 class="text-center " style=" color:white ; font-weight: bolder;">
-                Post to Timeline
+            <div class="panel-heading" style="background-color: rgb(255, 0, 0);">
+              <h4 class="text-center " style=" color:white ; font-weight: bolder;">UPLOAD YOUR PROJECT
               </h4>
             </div>
-            <div class="panel-body" style="background-color: #f7fbfc; color: black;">
+            <div class="panel-body" style="background-color: #f7fbfc; color: rgb(246, 6, 6);">
                   
                 <form  action="{%url 'new_post'%}" method="post" enctype="multipart/form-data">
                    
@@ -27,7 +21,7 @@
 
 					{% bootstrap_form form%}
                     <div class="form-group" style=" width: 100%; margin-top: 5%;">
-                        <input type="submit" class="btn " value="Post"  style="align-items: center; width: 100%; background-color: rgb(26, 25, 25); color: white;" >
+                        <input type="submit" class="btn " value="Post"  style="align-items: center; width: 100%; background-color: rgb(255, 1, 1); color: white;" >
     
                     </div>
     

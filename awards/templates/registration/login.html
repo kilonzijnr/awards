@@ -1,0 +1,77 @@
+{%extends "registration/base.html"%}
+{% load django_bootstrap5 %}
+{% block content %}
+<br><br>
+<style>
+  .login-card{
+    background-color: #00061c;
+		margin: 0 auto;
+		box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
+		border-radius: 10px;
+		color: white;
+    text-align: center;
+    max-width: 800px;
+    
+  }
+  .panel{
+    text-align: center;
+  }
+  .text-align{
+    text-align: center;
+    align-content: center;
+  }
+.sign{
+  text-align: left;
+}
+  .g-button{
+	outline: none;
+    border: none;
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    width: 150px;
+    border-radius: 8px;
+    background-color: #f15b04;
+    color: #fff;
+    font-weight: 600;
+  
+	}
+
+</style>
+<div class="login-card">
+  <div class="row">
+
+    <div class="text-align" >
+      {% if form.errors %}
+        <p> Password or Username is incorrect </p>
+      {% endif %}
+      <div class="panel panel-default"" >
+
+        <div class="panel-heading"></div>
+        <div class="panel">
+
+          <form  action="/accounts/login/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+
+            <div class="form-group" style=" width: 100%; padding-top: 3%;">
+                <input type="submit" class="g-button" value="Login" >
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+          <div class="sign" style="padding-left: 28%; padding-top: 3%;">
+             <span class="p">Don't have an account?</span>
+               
+             <a href="/accounts/register/" class="ml-2" style="color:rgb(255, 0, 0);">Sign Up</a>
+        </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

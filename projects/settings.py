@@ -14,13 +14,10 @@ from pathlib import Path
 import os
 import os
 from pathlib import Path
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
+import dj_database_url
 
 import django_heroku
-import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,7 +41,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'psycopg2',
     'django_bootstrap5',
-    'cloudinary',
     'django_heroku',
     'awards',
     'django.contrib.admin',

@@ -59,19 +59,19 @@ def edit(request):
 
     if request.method == "POST":
         user_form = UpdateUserForm(request.POST, instance=request.user)
-        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if user_form.is_valid() and prof_form.is_valid():
+  
+        if user_form.is_valid(): 
             user_form.save()
-            prof_form.save()
+
             return redirect('profile')
 
     else:
         user_form = UpdateUserForm(instance=request.user)
-        prof_form = UpdateUserProfileForm(instance= request.user.profile)
+       
 
     parameters = {
         'user_form': user_form,
-        'prof_form': prof_form,
+    
     }
     return render(request, 'new_profile.html', parameters)
 

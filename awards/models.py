@@ -2,7 +2,7 @@ from django.core import exceptions
 from django.db import models
 from django.contrib.auth.models import User
 
-from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -10,7 +10,7 @@ class Profile(models.Model):
     """A model for the User Profile"""
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_photo = CloudinaryField('image', default = 'media/default.jpeg')
+    profile_photo = models.ImageField(upload_to='images/')
     bio = models.CharField(blank=True, default='No Bio!', max_length=150)
     name = models.CharField(blank=True, max_length= 30)
     updated_at = models.DateTimeField(auto_now=True)
@@ -24,7 +24,7 @@ class Profile(models.Model):
 
 class Project(models.Model):
     """A model class for Projects"""
-    image = CloudinaryField('image')
+    image =models.ImageField(upload_to='images/')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     sitename = models.CharField(max_length=50)
     link= models.CharField(max_length=250)

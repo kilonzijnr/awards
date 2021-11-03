@@ -1,0 +1,35 @@
+{% load django_bootstrap5 %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% if title %}
+    <title>The Awards - {{title}}</title>
+    {% else %}
+      <title>The Awards </title>
+    {% endif %}
+    
+    {% block styles %}
+      {% bootstrap_css %}
+      <link rel="stylesheet" href="{% static 'css/index.css' %}">
+      <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Teko&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Shrikhand&display=swap" rel="stylesheet">
+      
+    {% endblock %}
+    <title>The Awards</title>
+  </head>
+  {% include 'navbar.html' %} 
+  <br><br>
+    <body>
+      {% block content %} {%endblock%}
+      {% block scripts %}
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       {% bootstrap_javascript %}
+      {% endblock %}
+    </body>
+</html>
