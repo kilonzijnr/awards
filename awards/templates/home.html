@@ -1,38 +1,31 @@
 {%extends 'base.html'%}
 {% load django_bootstrap5 %}
 {% block content %}
-<div>
-  <div class="container mt-5" style="color: black;">
-    <ul id="myUL">
-      {% for post in posts %}
-      <a href="{% url 'project' post.id %}">
-  
-        <li class="row mt-5 hvr-grow border-bottom">
-          <div class="col-md-3">
-            <a href="{% url 'project' post.id %}"><span style="display: none;">{{ post.sitename }}</span><img
-                    src="{{ post.image.url }}" class="img-thumbnail" width="500"></a>
-          </div>
-          <div class="col-md-9 project-font">
-            <a class="user-head" href="">
-              <button class="btn bg-transparent btn-lg" data-toggle="tooltip" data-placement="bottom"
-                      title="User">
-                <img src="{{ post.user.profile.profile_photo.url }}" class="rounded-circle" width="40" height="40">
-              <span class="username mx-2" style="font-size: 25px;">{{post.user}}</span></button></a>
-            <div class="ml-4">
-              <p>Project Name: {{ post.sitename }}</p>
-              <p class=""><a href="{{ post.link }}">
-                <button class="btn" style="background-color: black; color: white;">LINK</button>
-              </a></p>
-              <p class="text-muted float-right">{{ post.post_date }}</p>
-            </div>
-          </div>
-        </li>
-        
-      </a>
-      
-      {% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://images.unsplash.com/photo-1635817301822-0f6fe9a4c0b2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Vestibulum at eros</li>
     </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
   </div>
-  
+</body>
+</html>
   {% endblock %}
-</div>
