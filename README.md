@@ -31,7 +31,10 @@ To contribute to Project Review follow these steps:
 - Make your changes and commit them: git commit -m '<commit_message>'
 - Push to the original branch: git push origin <ft-comment>
 - Create the pull request.
-- Alternatively see the GitHub documentation on creating a pull request.
+- Alternatively see the GitHub documentation on creating a pull request.'
+ 
+ # Bugs
+ After deployment the project wasnt able to post
 
 # Contributors
 This application has being a personal undertaken project from scratch therefore having no secondary contributers for the curent version.
